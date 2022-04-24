@@ -1,0 +1,23 @@
+<script>
+  //解法1滑动窗口法
+  function maxArea(height) {
+    const n = height.length;
+    let res = 0;
+    let left = 0;
+    let right = n - 1;
+    while (left < right) {
+      let temp = (right - left) * Math.min(height[left], height[right]);
+      res = Math.max(temp, res);
+      if (left <= right) {
+        left++;
+      } else {
+        right--;
+      }
+    }
+    return res;
+  }
+
+  const height = [1, 8, 6, 2, 5, 4, 8, 3, 7];
+  let res = maxArea(height);
+  console.log(res);
+</script>
