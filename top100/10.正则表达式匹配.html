@@ -1,0 +1,37 @@
+<script>
+  //解法1动态规划法
+  function isMatch(s, p) {
+    const m = s.length;
+    const n = p.length;
+    let dp = Array.from(new Array(m + 1), () => {
+      return new Array(n + 1).fill(false);
+    });
+    dp[0][0] = true;
+    for (let i = 1; i <= m; i++) {
+      for (let j = 1; j <= n; j++) {
+        if (p[j - 1] === "*") {
+          dp[i][j] = dp[i][j - 2];
+          if (matches(s, p, i, j - 1)) {
+            dp[i][j] = dp[i][j] || dp[i - 1][j];
+          }
+        } else {
+          if (matches(s, p, i, j)) {
+            dp[i][j] = dp[i - 1][j - 1];
+          }
+        }
+      }
+    }
+    return dp[m][n];
+  }
+
+  function matches(s, p, i, j) {
+    if (i === 0) {
+      return false;
+    }
+    if (s[i - 1] !== p[j - 1] && p[j - 1] !== ".") {
+      return false;
+    } else {
+      return true;
+    }
+  }
+</script>

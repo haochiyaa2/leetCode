@@ -1,0 +1,29 @@
+<script>
+  //解法1 合并排序查找 O((n+m)^2)
+  function findMedianSortedArrays(arr1, arr2) {
+    let res = 0;
+    let resArray = arr1.concat(arr2);
+    resArray.sort((a, b) => a - b);
+    res =
+      resArray.length % 2 === 0
+        ? (resArray[parseInt(resArray.length / 2)] +
+            resArray[parseInt(resArray.length / 2) - 1]) /
+          2
+        : resArray[parseInt(resArray.length / 2)];
+    return res;
+  }
+
+  //解法2 二分法 找第k小的数 O(log (m+n))
+  function findMedianSortedArrays(arr1, arr2) {
+    let n = arr1.length + arr2.length;
+    let res = 0;
+    if (n % 2 === 1) {
+      res = getKthElement(arr1, arr2, parseInt(n + 1) / 2);
+    } else {
+      let k1 = getKthElement(arr1, arr2, n / 2);
+      let k2 = getKthElement(arr1, arr2, n / 2 + 1);
+      res = (k1 + k2) / 2;
+    }
+    return res;
+  }
+</script>

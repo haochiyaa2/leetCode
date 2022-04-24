@@ -1,0 +1,19 @@
+<script>
+  //栈使用法
+  function isValid(s) {
+    let leftStack = [];
+    let pairs = new Map([
+      ["(", ")"],
+      ["{", "}"],
+      ["[", "]"]
+    ]);
+    for (let i = 0; i < s.length; i++) {
+      if (pairs.get(leftStack[leftStack.length - 1]) === s[i]) {
+        leftStack.pop();
+      } else {
+        leftStack.push(s[i]);
+      }
+    }
+    return leftStack.length === 0 ? true : false;
+  }
+</script>
